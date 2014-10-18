@@ -9,6 +9,7 @@ float pondY;
 float speed;
 
 int life;
+int currentTime = 0;
 
 final int GAME_START = 1;
 final int GAME_WIN = 2;
@@ -69,11 +70,11 @@ void draw(){
         text("Press Enter", width/3, height/2);    
         break;
     case FROG_DIE:
-        delay(1000);
+        if(millis()-currentTime >= 1000){
         frogX=frogInitX;
         frogY=frogInitY;
         gameState = GAME_RUN;
-        break;
+        }
     case GAME_RUN:
         background(10,110,16);
         
@@ -126,24 +127,28 @@ void draw(){
          float frogCY = frogY+frogH/2;
          // car1 hitTest
          if(leftCar1Y-16 <= frogY && leftCar1Y+16 >= frogY && leftCar1X-16 <= frogX && leftCar1X+16 >= frogX){
+         currentTime = millis();
          image(imgDeadFrog, frogX, frogY);
          life--;
          gameState = FROG_DIE;
          }
          // car2 hitTest
          if(leftCar2Y-16 <= frogY && leftCar2Y+16 >= frogY && leftCar2X-16 <= frogX && leftCar2X+16 >= frogX){
+         currentTime = millis();
          image(imgDeadFrog, frogX, frogY);
          life--;
          gameState = FROG_DIE;
          }
          // car3 hitTest
          if(rightCar1Y-16 <= frogY && rightCar1Y+16 >= frogY && rightCar1X-16 <= frogX && rightCar1X+16 >= frogX){
+         currentTime = millis();
          image(imgDeadFrog, frogX, frogY);
          life--;
          gameState = FROG_DIE;
          }
          // car4 hitTest
          if(rightCar2Y-16 <= frogY && rightCar2Y+16 >= frogY && rightCar2X-16 <= frogX && rightCar2X+16 >= frogX){
+         currentTime = millis();
          image(imgDeadFrog, frogX, frogY);
          life--;
          gameState = FROG_DIE;
